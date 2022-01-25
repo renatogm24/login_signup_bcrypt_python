@@ -1,0 +1,101 @@
+.card-message {
+    background-color: lightsteelblue;
+    padding: 10px;
+    margin: 5px 10px;
+    border-radius: 15px;
+    display: flex;
+}
+
+.card-message-image {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-message-image img {
+    border-radius: 15px;
+}
+
+.card-message-text {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8px;
+}
+
+.card-message-text p {
+    margin: 0;
+    padding: 0;
+}
+
+.card-message-text strong {
+    margin-right: 10px;
+}
+
+.card-message-icon {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+}
+
+.card-message-icon a {
+    color: black;
+}
+
+.messagesBx {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.send-message {
+    display: flex;
+    align-items: center;
+    background-color: lightsteelblue;
+    padding: 10px 0;
+    border-radius: 15px;
+}
+
+.messageSent {
+    display: block;
+    transition: 2s;
+    position: relative;
+    bottom: 0;
+    z-index: 1;
+}
+
+.messageSent.hideMessage {
+    bottom: 50px;
+    z-index: -100;
+}
+
+.send-message .name {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.send-message .text {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-message .text textarea {
+    height: 70px;
+    resize: none;
+    border-radius: 15px;
+}
+
+.send-message .input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

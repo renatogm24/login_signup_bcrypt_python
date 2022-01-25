@@ -4,8 +4,12 @@ from flask_app import app
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
+from flask_app.models import message
+
 @app.route('/')
 def index():
+  if 'user_id' in session:
+    return redirect("/dashboard")
   return render_template("index.html")
 
 @app.route('/register/user', methods=['POST'])
@@ -51,7 +55,12 @@ def login():
 def dashboard():
   if 'user_id' not in session:
     return redirect("/")
-  return render_template("dashboard.html")
+  id = session["user_id"]
+  messages = message.Message.get_messages_received({"id":id})
+  users = user.User.get_users_except_id({"id":id})
+  sent = message.Message.get_messages_sent({"id":id})
+  userSession = user.User.get_user_by_id({"id":id})
+  return render_template("dashboard.html",messages=messages,users=users,sent=sent,userSession=userSession)
 
 @app.route('/logout')
 def logout():

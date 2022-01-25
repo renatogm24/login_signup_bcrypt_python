@@ -18,20 +18,39 @@ class User:
     @classmethod
     def save(cls, data ):
         query = "INSERT INTO users (first_name, last_name, email , password, created_at, updated_at ) VALUES ( %(first_name)s , %(last_name)s ,%(email)s ,%(password)s ,NOW() , NOW() );"
-        return connectToMySQL('user_bcrypt_schema').query_db( query, data )
+        return connectToMySQL('dojo_chat').query_db( query, data )
 
     @classmethod
     def get_user_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        results = connectToMySQL('user_bcrypt_schema').query_db(query,data)
+        results = connectToMySQL('dojo_chat').query_db(query,data)
         if len(results) < 1:
           return False
         return cls(results[0])
 
     @classmethod
+    def get_user_by_id(cls,data):
+        query = "SELECT * FROM users WHERE id = %(id)s;"
+        results = connectToMySQL('dojo_chat').query_db(query,data)
+        if len(results) < 1:
+          return False
+        return cls(results[0])
+
+    @classmethod
+    def get_users_except_id(cls,data):
+        query = "SELECT * FROM users WHERE id != %(id)s;"
+        results = connectToMySQL('dojo_chat').query_db(query,data)
+        users = []
+        if len(results) < 1:
+          return False
+        for user in results:
+          users.append(cls(user))
+        return users
+
+    @classmethod
     def exist_mail(cls,data):
         query = "SELECT * FROM users where email = %(email)s;"
-        results = connectToMySQL('user_bcrypt_schema').query_db(query,data)
+        results = connectToMySQL('dojo_chat').query_db(query,data)
         print(results)
         if len(results) == 0:
           return False
